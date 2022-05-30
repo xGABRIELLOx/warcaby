@@ -1,0 +1,194 @@
+<!DOCTYPE HTML>
+<html lang='pl'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='discription' content=''>
+    <meta name='keywords' content=''>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <link rel='stylesheet' href=''>
+
+    <title>Document</title>
+
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .loginForm {
+            z-index: 1000000000000;
+            position: absolute;
+
+            width: 40%;
+            left: 30%;
+            top: 30%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 5px;
+            color: greenyellow;
+            border: 5px yellowgreen solid;
+            border-radius: 20px;
+        }
+
+        .btn {
+            background-color: greenyellow;
+            color: black;
+            width: 40%;
+            text-align: center;
+            margin: 5px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .loginInput {
+            width: 40%;
+            height: 20px;
+            background-color: rgba(0, 0, 0, 0);
+            border: 2px solid yellowgreen;
+            border-radius: 20px;
+            color: yellowgreen;
+        }
+
+        .transparentBg {
+            background-color: rgba(0, 0, 0, 0.5);
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 10000000;
+        }
+
+        .statusBar {
+            position: absolute;
+            z-index: 1000000000;
+            width: 100%;
+            border-bottom: 2px solid yellowgreen;
+            background-color: green;
+            color: yellowgreen;
+            font-size: 10px;
+        }
+
+        :root {
+            --s-loader-wrapper-bg-color: rgb(29, 98, 1);
+            --s-loader-width: 30px;
+            --s-loader-height: var(--s-loader-width);
+            --s-loader-border-color-trans: rgba(50, 126, 50, 0.2);
+            --s-loader-border-color-full: rgb(46, 255, 57);
+        }
+
+        .spinning-loader {
+            width: var(--s-loader-width);
+            height: var(--s-loader-height);
+
+            border: 5px solid var(--s-loader-border-color-trans);
+            border-left-color: var(--s-loader-border-color-full);
+            border-radius: 50%;
+            background: transparent;
+
+            animation-name: rotate-s-loader;
+            animation-iteration-count: infinite;
+            animation-duration: 1s;
+            animation-timing-function: linear;
+            position: relative;
+        }
+
+        .gameField{
+            width:150px;
+            height:150px;
+            position: absolute;
+            z-index: 100000;
+            top:calc(100% - 150px);
+            left:0px;
+            background-color: green;
+            color:white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .transparentBgTwo{
+            background-color: rgba(0, 0, 0, 0.5);
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 10000000;
+            display: none;
+            text-align: center;
+            color: white;
+            font-size:40px;
+            
+        }
+
+        @keyframes rotate-s-loader {
+            from {
+                transform: rotate(0);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+       
+    </style>
+</head>
+
+<body>
+    <div id="statusBar" class="statusBar">
+        <h2>STATUS</h2>
+    </div>
+    <div id="userLogin" class="loginForm">
+        <h2>LOGOWANIE</h2>
+        <input type="text" class="loginInput" id="loginInput">
+        <div id="loginBtn" class="btn">
+            <p>LOGUJ</p>
+        </div>
+        <div id="resetBtn" class="btn" onclick="reset()">
+            <p>RESET</p>
+        </div>
+    </div>
+    <div class="transparentBg" id="bg">
+
+    </div>
+    <div class="gameField" id="gameField">
+
+    </div>
+    <div class="transparentBgTwo" id="bgTwo">
+
+    </div>
+    <div id="root">
+
+    </div>
+
+
+    <script src="../libs/tween.umd.js"></script>
+    <script src='../libs/three.js'>
+
+    </script>
+    <script type="module" src="Game.js">
+        import Pionek from "./Pionek.js"
+    </script>
+    <script type="module" src="Main.js">
+        import Game from "./Game.js"
+    </script>
+    <script src="Net.js"></script>
+    <script src="Ui.js"></script>
+    <script>
+        function reset(){
+            const body = ""
+
+            fetch("/reset", { method: "post", body }) // fetch
+                .then(response => response.text())
+                .then(
+                    data => {
+
+                    } // dane odpowiedzi z serwera
+                )
+        }
+    </script>
+</body>
+
+</html>
